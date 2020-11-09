@@ -1,0 +1,15 @@
+Uppgift 1:
+
+T=f(a,Y,Z), T=f(X,X,b).
+
+T binds till f(a,Y,Z)
+
+T binds till f(X,X,b)
+
+Konstant a tilldelas till variabel X
+
+Y variabel sätts tills variabel X, vilket i detta fall är a (Y = X, X = a)
+
+Variabel Z sätts till b (Z = b)
+
+Därför blir utskriften T = f(a, a, b).

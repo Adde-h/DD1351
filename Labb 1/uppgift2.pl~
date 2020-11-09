@@ -1,0 +1,18 @@
+%We want to achieve
+
+
+car(mercedes).
+car(volvo).
+car(tesla).
+car(bmw).
+car(audi).
+car(renault).
+car(citroen).
+
+french_car(renault).
+french_car(citroen).
+
+likes(adde,X) :- french_car(X), !, fail.
+
+likes(adde,X) :- car(X).
+
