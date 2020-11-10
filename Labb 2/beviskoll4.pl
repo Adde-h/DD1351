@@ -9,7 +9,6 @@ verify(InputFileName) :- see(InputFileName),
 	seen,
 	valid_proof(Prems, Goal, Proof).
 
-
 valid_proof(Prems, Goal, Proof):- 
 	checkGoal(Goal, Proof),
 	checkProof(Prems, Proof, []), !,
@@ -24,7 +23,7 @@ checkGoal(Goal, Proof):-
 % Steg 2: Kontrollera beviset rad för rad
 
 checkProof(_, [], _).
-checkProof(Prems, [H|T], CheckedList) :- 
+checkProof(Prems, [H|T], CheckedList):- 
     check_rule(Prems, H, CheckedList),
     addToList(H, CheckedList, NewList), 
     checkProof(Prems, T, NewList).
