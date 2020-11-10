@@ -31,6 +31,18 @@ checkProof(Prems, [H|T], CheckedList) :-
 check_rule(Prems, [_, Atom, premise],_):-
 	member(Atom, Prems).
 
+% Kollar andint(X,Y)
+check_rule(_, [_, and(X2,Y2), andint(X,Y)], CheckedList):-
+	member([X, X2, premise], CheckedList),
+	member([Y, Y2, premise], CheckedList).
+
+% Kollar orint1(X) och orint2(X)
+check_rule(_,[_,or(X,_), orint1(Z)], CheckedList):-
+	member([Z,X,_], CheckedList).
+
+check_rule(_,[_,or(_,Y), orint2(Z)], CheckedList):-
+	member([Z,Y,_], CheckedList).
+
 % Kollar regel andel1
 check_rule(_, [_, Atom, andel1(X)],_):-
 	member([X, and(X2,_), _], CheckedList).
