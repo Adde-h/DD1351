@@ -1,8 +1,6 @@
 % ['C:/Users/tonac/Desktop/Prolog/Labb2/beviskoll2.pl'].
-% ['C:/Users/adeel/OneDrive/KTH/Årskurs 2/HT-20/Logik För Dataloger/DD1351/Labb 2/beviskoll2.pl'].
 % ['beviskoll2.pl'].
-%
-% [1, p, impel(2,1)]
+%  [1, p, impel(2,1)]
 
 
 verify(InputFileName) :- see(InputFileName),
@@ -14,8 +12,8 @@ verify(InputFileName) :- see(InputFileName),
 
 valid_proof(Prems, Goal, Proof) :-
 	checkGoal(Goal, Proof),
-	checkProof(Proof, []), !,
-	write('predikatet uppfyllt!').
+	checkProof(Prems, Proof), !,
+	write('predikatet uppfyll!').
 
 checkGoal(Goal, Proof) :-
 	last(Proof, LastRow),
@@ -23,24 +21,24 @@ checkGoal(Goal, Proof) :-
 
 % Steg 2: Kontrollera beviset rad för rad
 
-checkProof([], _).
-checkProof([H|T], CheckedList):-
-	check_rule(H),
-	checkProof(T, CheckedList).
+checkProof(_, []).
+checkProof(Prems, [H|T]) :-
+	checkRow(Prems, H),
+	checkProof(Prems, T).
 
-% Kollar om det är en premiss
+%% Kollar om det är en premiss
+checkRow(Prems, H) :-
+	nth1(3, H, premise),
+	nth1(2,H, X),
+	member(X, Prems).
 
-check_rule([_, Atom, premise]):-
-	member(Atom, Prems).
 
-
-
-%Kollar för varje regel check_rule
+%Kollar för varje regel
 
 %Impel
-%check_rule([_,Prems, impel(X,Y)],
+check_rule([_,Prems, impel(X,Y)],
 
-%check_rule([_,Prems, and(X,Y)],
+check_rule([_,Prems, and(X,Y)],
 
 
 
