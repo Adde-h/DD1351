@@ -1,8 +1,10 @@
 :- discontiguous check_rule/3.
 % ['C:/Users/tonac/Desktop/Prolog/Labb2/beviskoll2.pl'].
+% ['C:/Users/tonac/Documents/GitHub/DD1351/Labb2/beviskoll4.pl'].
 % ['C:/Users/adeel/OneDrive/KTH/Årskurs 2/HT-20/Logik För Dataloger/DD1351/Labb 2/beviskoll2.pl'].
-% ['beviskoll4.pl'].
+% ['test.pl'].
 %test
+
 
 
 verify(InputFileName) :- see(InputFileName),
@@ -63,7 +65,7 @@ check_rule(_, or(Atom, neg(Atom), lem)):-
 	true.
 
 % Kollar regel Copy(x)
-check_rule(_,[_,Atom, copy(X)], CheckedList):-
+check_rule(_,[_,Atom, copy(X)], CheckedList):- 
 	member([X,Atom,_], CheckedList).
 
 %Kollar regel Negations Eleminering (negel)
@@ -84,10 +86,3 @@ addToList(H, CheckedList, NewList):-
 appendEl(X, [], [X]).
 appendEl(X, [H | T], [H | Y]):-
 	appendEl(X, T, Y).
-	
-	
-	
-
-
-
-
