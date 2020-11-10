@@ -31,7 +31,15 @@ checkProof(Prems, [H|T], CheckedList) :-
 check_rule(Prems, [_, Atom, premise],_):-
 	member(Atom, Prems).
 
-% Kollar regel impel(x,y)
+% Kollar regel andel1
+check_rule(_, [_, Atom, andel1(X)],_):-
+	member([X, and(X2,_), _], CheckedList).
+
+% Kollar regel andel2
+check_rule(_, [_, Atom, andel2(X)],_):-
+	member([X, and(_,X2), _], CheckedList).
+
+% Kollar regel Implikations Elemenering (impel(x,y))
 check_rule(_, [_, Atom, impel(X,Y)], CheckedList):-
     member([X, X2,_], CheckedList),
     member([Y, imp(X2,Atom),_], CheckedList).
@@ -44,10 +52,14 @@ check_rule(_, or(Atom, neg(Atom), lem)):-
 check_rule(_,[_,Atom, copy(X)], CheckedList):-
 	member([X,Atom,_], CheckedList).
 
-%Kollar regel Negel
+%Kollar regel Negations Eleminering (negel)
 check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 	member([X, X2,_], CheckedList),
 	member([Y, neg(X2),_], CheckedList).
+
+% Kollar regel Dubbelnegations Eleminering (negnegel)
+check_rule(_, ):-
+
 
 
 % Lägger till ny lista
