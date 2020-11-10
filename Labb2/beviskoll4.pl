@@ -71,7 +71,7 @@ check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 	member([Y, neg(X2),_], CheckedList).
 
 % Kollar regel Dubbelnegations Eleminering (negnegel)
-check_rule(_, ):-
+%check_rule(_, ):-
 
 
 
