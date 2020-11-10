@@ -1,6 +1,7 @@
 % ['C:/Users/tonac/Desktop/Prolog/Labb2/beviskoll2.pl'].
 % ['C:/Users/adeel/OneDrive/KTH/Årskurs 2/HT-20/Logik För Dataloger/DD1351/Labb 2/beviskoll2.pl'].
 % ['beviskoll4.pl'].
+%test
 
 verify(InputFileName) :- see(InputFileName),
 	read(Prems), read(Goal), read(Proof),
