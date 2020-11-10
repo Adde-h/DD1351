@@ -7,12 +7,13 @@ verify(InputFileName) :- see(InputFileName),
 	seen,
 	valid_proof(Prems, Goal, Proof).
 
-% Steg 1: kontrollera att slutsatsen goal i HL (sekventen) står på sista raden
 
 valid_proof(Prems, Goal, Proof):- 
 	checkGoal(Goal, Proof),
 	checkProof(Prems, Proof, []), !,
 	write('predikatet uppfyll!').
+
+% Steg 1: kontrollera att slutsatsen goal i HL (sekventen) står på sista raden
 
 checkGoal(Goal, Proof):- 
 	last(Proof, LastRow),
@@ -34,6 +35,20 @@ check_rule(Prems, [_, Atom, premise],_):-
 check_rule(_, [_, Atom, impel(X,Y)], CheckedList):-
     member([X, X2,_], CheckedList),
     member([Y, imp(X2,Atom),_], CheckedList).
+
+% Kollar regel lem
+check_rule(_, or(Atom, neg(Atom), lem)):-
+	true.
+
+% Kollar regel Copy(x)
+check_rule(_,[_,Atom, copy(X)], CheckedList):-
+	member([X,Atom,_], CheckedList).
+
+%Kollar regel Negel
+check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
+	member([X, X2,_], CheckedList),
+	member([Y, neg(X2),_], CheckedList).
+
 
 % Lägger till ny lista
 addToList(H, CheckedList, NewList):-
