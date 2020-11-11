@@ -28,7 +28,7 @@ checkGoal(Goal, Proof):-
 checkProof(_, [], _).
 checkProof(Prems, [H|T], CheckedList):- 
     check_rule(Prems, H, CheckedList),
-    addToList(H, CheckedList, NewList), 
+    addToList(H, CheckedList, NewList),
     checkProof(Prems, T, NewList).
 
 %% Kollar om det är en premiss
@@ -72,6 +72,11 @@ check_rule(_,[_,Atom, copy(X)], CheckedList):-
 check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 	member([X, X2,_], CheckedList),
 	member([Y, neg(X2),_], CheckedList).
+
+% Kollar regel mt(x,y)
+check_rule(_,[_, neg(Atom), mt(X,Y)], CheckedList):-
+	member([X,imp(Atom,neg(Atom2)),_], CheckedList),
+	member([Y,neg(neg(Atom2)),_], CheckedList).
 
 % Kollar regel Dubbelnegations Eleminering (negnegel)
 %check_rule(_,_,_).
