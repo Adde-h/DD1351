@@ -1,10 +1,11 @@
-[imp(p, neg(q)), q, neg(neg(q))].
+[imp(p, neg(q)), q].
 
 neg(p).
 
 [
   [1, imp(p,neg(q)), 	premise],
   [2, q,        	premise],
-  [3, neg(neg(q)),      premise],
-  [4, neg(p),		mt(1,2)]
+  [3, neg(neg(q)),      negnegint(2)],
+  [4, q,		negnegel(3)],
+  [5, neg(p),		mt(1,3)]
 ].

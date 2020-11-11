@@ -38,10 +38,11 @@ check_rule(_, [_, and(X2,Y2), andint(X,Y)], CheckedList):-
 	member([X, X2, premise], CheckedList),
 	member([Y, Y2, premise], CheckedList).
 
-% Kollar orint1(X) och orint2(X)
+% Kollar orint1(X)
 check_rule(_,[_,or(X,_), orint1(Z)], CheckedList):-
 	member([Z,X,_], CheckedList).
 
+% Kollar orint2(X)
 check_rule(_,[_,or(_,Y), orint2(Z)], CheckedList) :-
 	member([Z,Y,_], CheckedList).
 
@@ -71,10 +72,18 @@ check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 	member([X, X2,_], CheckedList),
 	member([Y, neg(X2),_], CheckedList).
 
+% Kollar regel mt(x,y) (ska lägga in resternade tre scenario till)
+check_rule(_,[_, neg(Atom), mt(X,Y)], CheckedList):-
+	member([X,imp(Atom,neg(Atom2)),_], CheckedList),
+	member([Y,neg(neg(Atom2)),_], CheckedList).
+
+% Kollar regel dubbelnegation introduktion negnegint(x)
+check_rule(_,[_, neg(neg(Atom)), negnegint(X)], CheckedList):-
+	member([X, Atom,_], CheckedList).
+
 % Kollar regel Dubbelnegations Eleminering (negnegel)
-%check_rule(_,_,_).
-
-
+check_rule(_,[_,Atom, negnegel(X)], CheckedList):-
+	member([X, neg(neg(Atom)),_], CheckedList).
 
 % Lägger till ny lista
 addToList(H, CheckedList, NewList):-
