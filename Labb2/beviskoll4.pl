@@ -46,11 +46,11 @@ check_rule(_,[_,or(X,_), orint1(Z)], CheckedList):-
 check_rule(_,[_,or(_,Y), orint2(Z)], CheckedList) :-
 	member([Z,Y,_], CheckedList).
 
-% Kollar regel andel1
+% Kollar regel andel1         
 check_rule(_, [_, Atom, andel1(X)],_):-
 	member([X, and(X2,_), _], CheckedList).
 
-% Kollar regel andel2
+% Kollar regel andel2 
 check_rule(_, [_, Atom, andel2(X)],_):-
 	member([X, and(_,X2), _], CheckedList).
 
