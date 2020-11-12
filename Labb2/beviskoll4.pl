@@ -2,7 +2,27 @@
 % ['C:/Users/tonac/Desktop/Prolog/Labb2/beviskoll2.pl'].
 % ['C:/Users/adeel/OneDrive/KTH/Årskurs 2/HT-20/Logik För Dataloger/DD1351/Labb 2/beviskoll2.pl'].
 % ['beviskoll4.pl'].
-%test
+% test
+
+%premise Klart
+%assumption	
+%copy(x) Klart
+%andint(x,y) Klart
+%andel1(x) Klart
+%andel2(x) Klart
+%orint1(x) Klart
+%orint2(x) Klart
+%orel(x,y,u,v,w)
+%impint(x,y) Klart
+%impel(x,y)	Klart
+%negint(x,y) 
+%negel(x,y) Klart
+%contel(x) 
+%negnegint(x) Klart
+%negnegel(x) Klart
+%mt(x,y) Klart
+%pbc(x,y) 
+%lem Klart
 
 
 verify(InputFileName) :- see(InputFileName),
@@ -84,6 +104,12 @@ check_rule(_,[_, neg(neg(Atom)), negnegint(X)], CheckedList):-
 % Kollar regel Dubbelnegations Eleminering (negnegel)
 check_rule(_,[_,Atom, negnegel(X)], CheckedList):-
 	member([X, neg(neg(Atom)),_], CheckedList).
+
+% Kollar regel assumption
+check_rule(Prems, [_, Atom, assumption], CheckedList):-
+	member(Atom, Prems). %EJ KLARTÄNKT
+
+
 
 % Lägger till ny lista
 addToList(H, CheckedList, NewList):-
