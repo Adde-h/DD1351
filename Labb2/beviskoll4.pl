@@ -54,8 +54,8 @@ check_rule(Prems, [_, Atom, premise], _):-
 
 % Kollar andint(X,Y)
 check_rule(_, [_, and(X2,Y2), andint(X,Y)], CheckedList):-
-	member([X, X2, premise], CheckedList),
-	member([Y, Y2, premise], CheckedList).
+	member([X, X2, _], CheckedList),
+	member([Y, Y2, _], CheckedList).
 
 % Kollar orint1(X)
 check_rule(_,[_,or(X,_), orint1(Z)], CheckedList):-
