@@ -1,4 +1,3 @@
-:- discontiguous check_rule/3.
 % ['C:/Users/tonac/Desktop/Prolog/Labb2/beviskoll2.pl'].
 % ['C:/Users/adeel/OneDrive/KTH/Årskurs 2/HT-20/Logik För Dataloger/DD1351/Labb 2/beviskoll2.pl'].
 % ['beviskoll4.pl'].
@@ -13,7 +12,7 @@
 %orint1(x) Klart
 %orint2(x) Klart
 %orel(x,y,u,v,w)
-%impint(x,y) Klart
+%impint(x,y) 
 %impel(x,y)	Klart
 %negint(x,y) 
 %negel(x,y) Klart
@@ -67,25 +66,24 @@ check_rule(_,[_,or(_,Y), orint2(Z)], CheckedList) :-
 	member([Z,Y,_], CheckedList).
 
 % Kollar regel andel1         
-check_rule(_, [_, Atom, andel1(X)],_):-
-	member([X, and(X2,_), _], CheckedList).
+check_rule(_, [_, Atom, andel1(X)],CheckedList):-
+	member([X, and(Atom,_), _], CheckedList).
 
 % Kollar regel andel2 
-check_rule(_, [_, Atom, andel2(X)],_):-
-	member([X, and(_,X2), _], CheckedList).
+check_rule(_, [_, Atom, andel2(X)],CheckedList):-
+	member([X, and(_,Atom), _],CheckedList).
 
 % Kollar regel Implikations Elemenering (impel(x,y))
-check_rule(_, [_, Atom, impel(X,Y)], CheckedList):-
-    member([X, X2,_], CheckedList),
-    member([Y, imp(X2,Atom),_], CheckedList).
+check_rule(_, [_, Atom, impel(X,Y)],CheckedList):-
+    member([X, X2,_],CheckedList),
+    member([Y, imp(X2,Atom),_],CheckedList).
 
 % Kollar regel lem
-check_rule(_, or(Atom, neg(Atom), lem)):-
-	true.
+check_rule(_, [_,or(Atom, neg(Atom)), lem],_).
 
 % Kollar regel Copy(x)
-check_rule(_,[_,Atom, copy(X)], CheckedList):-
-	member([X,Atom,_], CheckedList).
+check_rule(_,[_,Atom, copy(X)],CheckedList):-
+	member([X,Atom,_],CheckedList).
 
 %Kollar regel Negations Eleminering (negel)
 check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
@@ -106,9 +104,14 @@ check_rule(_,[_,Atom, negnegel(X)], CheckedList):-
 	member([X, neg(neg(Atom)),_], CheckedList).
 
 % Kollar regel assumption
-check_rule(Prems, [_, Atom, assumption], CheckedList):-
+check_rule(Prems, [_, Atom, assumption], _):-
 	member(Atom, Prems). %EJ KLARTÄNKT
 
+%Boxhantering
+
+%Kollar boxen och kallar checkProof som sedan rekursivt itererar igenom boxen
+check_rule(_, [[_, _, assumption]|T], CheckedList):-
+	checkProof(_,T,CheckedList).
 
 
 % Lägger till ny lista

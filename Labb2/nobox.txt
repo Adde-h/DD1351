@@ -1,0 +1,13 @@
+[and(and(p,q),r),and(s,t)].
+
+and(q,s).
+
+[
+	[1, and(and(p,q),r), premise],
+	[2, and(s,t), premise],
+	[3, and(p,q), andel1(1)],
+	[4, q, andel2(3)],
+	[5, s, andel1(2)],
+	[6, and(q,s), andint(4,5)]
+
+].
