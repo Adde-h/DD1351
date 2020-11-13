@@ -9,6 +9,6 @@ neg(p).
     [3, p,			assumption ],
     [4, neg(p),			impel(3,2) ],
     [5, cont,			negel(3,4) ]
- ],
+  ],
   [6, neg(p),			negint(3,5)]
 ]. 
