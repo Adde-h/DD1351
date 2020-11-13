@@ -1,5 +1,9 @@
 % ['C:/Users/tonac/Desktop/Prolog/Labb2/beviskoll2.pl'].
+% ['C:/Users/tonac/Documents/GitHub/DD1351/Labb2/beviskoll4.pl'].
 % ['C:/Users/adeel/OneDrive/KTH/Årskurs 2/HT-20/Logik För Dataloger/DD1351/Labb 2/beviskoll2.pl'].
+% 
+% cd C:/Users/tonac/Documents/GitHub/DD1351/Labb2/
+% swipl
 % ['beviskoll4.pl'].
 % test
 
@@ -45,7 +49,7 @@ checkGoal(Goal, Proof):-
 checkProof(_, [], _).
 checkProof(Prems, [H|T], CheckedList):- 
     check_rule(Prems, H, CheckedList),
-    addToList(H, CheckedList, NewList), 
+	addToList(H, CheckedList, NewList), 
     checkProof(Prems, T, NewList).
 
 %% Kollar om det är en premiss
@@ -104,8 +108,8 @@ check_rule(_,[_,Atom, negnegel(X)], CheckedList):-
 	member([X, neg(neg(Atom)),_], CheckedList).
 
 % Kollar regel assumption
-check_rule(Prems, [_, Atom, assumption], _):-
-	member(Atom, Prems). %EJ KLARTÄNKT
+%check_rule(Prems, [_, Atom, assumption], _):-
+%	member(Atom, Prems). %EJ KLARTÄNKT
 
 %Boxhantering
 
@@ -113,6 +117,10 @@ check_rule(Prems, [_, Atom, assumption], _):-
 check_rule(_, [[_, _, assumption]|T], CheckedList):-
 	checkProof(_,T,CheckedList).
 
+
+% Kollar regel Impint
+%check_rule(_, [_, imp(X,Y), impint(X1,Y1)], CheckedList):-
+%	member([X1, X, assumption], BoxList)
 
 % Lägger till ny lista
 addToList(H, CheckedList, NewList):-
