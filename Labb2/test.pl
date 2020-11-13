@@ -16,7 +16,7 @@
 %orint1(x) Klart
 %orint2(x) Klart
 %orel(x,y,u,v,w)
-%impint(x,y) 
+%impint(x,y) Klar
 %impel(x,y)	Klart
 %negint(x,y) 
 %negel(x,y) Klart
@@ -36,7 +36,7 @@ verify(InputFileName) :- see(InputFileName),
 valid_proof(Prems, Goal, Proof):- 
 	checkGoal(Goal, Proof),
 	checkProof(Prems, Proof, []), !,
-	write('predikatet uppfyll!').
+	write('predikatet uppfyllt!').
 
 % Steg 1: kontrollera att slutsatsen goal i HL (sekventen) står på sista raden
 
@@ -48,11 +48,10 @@ checkGoal(Goal, Proof):-
 
 checkProof(_, [], _).
 checkProof(Prems, [H|T], CheckedList):- 
-    check_rule(Prems, H, CheckedList),
-	addToList(H, CheckedList, NewList), 
-	checkProof(Prems, T, NewList),
-	write(NewList),
-	write('\n').
+	check_rule(Prems, H, CheckedList),
+	addToList(H, CheckedList, NewList),
+	checkProof(Prems, T, NewList).
+	
 
 %% Kollar om det är en premiss
 check_rule(Prems, [_, Atom, premise], _):-
@@ -148,21 +147,22 @@ check_rule(_, [[X, Y, assumption]|T], CheckedList):-
 	write('assumption box regeln !'),
 	write('\n'),
 	checkProof(_,T,NewList).
+	
 
 % Kollar regeln Negint
 %check_rule(_,)
 
 % Kollar regel Impint
 check_rule(_, [_, imp(X,Y), impint(X1,Y1)], CheckedList):-
-	write(CheckedList),
-	member([X1, X, assumption], CheckedList),
-	member([Y1, Y, _], CheckedList),
+	member(BoxList, CheckedList),
+	member([X1, X, assumption], BoxList),
+	member([Y1, Y, _], BoxList),
 	write('impint regeln !'),
 	write('\n').
 
 % Lägger till ny lista
 addToList(H, CheckedList, NewList):-
-    appendEl(H, CheckedList, NewList).
+	appendEl(H, CheckedList, NewList).
      
 % Lägger in längst bak i nya listan
 appendEl(X, [], [X]).
