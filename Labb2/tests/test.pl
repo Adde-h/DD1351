@@ -20,22 +20,17 @@
 % andel2(x) 		Klart
 % orint1(x) 		Klart
 % orint2(x) 		Klart
-% orel(x,y,u,v,w)	Klart (Behöver Testas)
+% orel(x,y,u,v,w)	Klart (Behöver testas)
 % impint(x,y) 		Klart
 % impel(x,y)		Klart
-% negint(x,y) 		Klart
+% negint(x,y) 		Klart (Behöver testas)
 % negel(x,y) 		Klart
-% contel(x) 		Klart
+% contel(x) 		Klart (Behöver testas)
 % negnegint(x) 		Klart
 % negnegel(x) 		Klart
-% mt(x,y) 			Klart (Ej Fullständig)
-% pbc(x,y) 			Klart
+% mt(x,y) 			Klart
+% pbc(x,y) 			Klart (Behöver testas)
 % lem 				Klart
-%
-% valid03.txt failed. The proof is valid but your program rejected it!
-% valid04.txt failed. The proof is valid but your program rejected it!
-% valid16.txt failed. The proof is valid but your program rejected it!
-% valid19.txt failed. The proof is valid but your program rejected it!
 
 
 verify(InputFileName) :- see(InputFileName),
