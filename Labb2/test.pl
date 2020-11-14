@@ -194,7 +194,7 @@ check_rule(_, [_, Atom, pbc(X,Y)], CheckedList):-
 	write('\n').
 
 % Kollar regel OR-eliminering orel(x,y,u,v,w)
-checked_rule(_, [_, Atom, orel(S1,S2,S3,S4,S5)], CheckedList):-
+check_rule(_, [_, Atom, orel(S1,S2,S3,S4,S5)], CheckedList):-
 	member(BoxList1, CheckedList),
 	member(BoxList2, CheckedList),
 	member([S1, or(Atom1,Atom2),_], CheckedList),

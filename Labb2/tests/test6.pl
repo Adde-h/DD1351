@@ -11,6 +11,8 @@
 % swipl
 % ['test.pl'].
 % test
+% ['run_all_tests.pl'].
+% run_all_tests('test6.pl').
 
 % premise 			Klart
 % assumption		Klart
@@ -20,17 +22,22 @@
 % andel2(x) 		Klart
 % orint1(x) 		Klart
 % orint2(x) 		Klart
-% orel(x,y,u,v,w)	Klart (Behöver testas)
+% orel(x,y,u,v,w)	Klart (Behöver Testas)
 % impint(x,y) 		Klart
 % impel(x,y)		Klart
-% negint(x,y) 		Klart (Behöver testas)
+% negint(x,y) 		Klart
 % negel(x,y) 		Klart
-% contel(x) 		Klart (Behöver testas)
+% contel(x) 		Klart
 % negnegint(x) 		Klart
 % negnegel(x) 		Klart
-% mt(x,y) 			Klart
-% pbc(x,y) 			Klart (Behöver testas)
+% mt(x,y) 			Klart (Ej Fullständig)
+% pbc(x,y) 			Klart
 % lem 				Klart
+%
+% valid03.txt failed. The proof is valid but your program rejected it!
+% valid04.txt failed. The proof is valid but your program rejected it!
+% valid16.txt failed. The proof is valid but your program rejected it!
+% valid19.txt failed. The proof is valid but your program rejected it!
 
 
 verify(InputFileName) :- see(InputFileName),
@@ -97,6 +104,7 @@ check_rule(_, [_, Atom, impel(X,Y)],CheckedList):-
 % Kollar regel lem
 check_rule(_, [_,or(Atom, neg(Atom)), lem],_).
 
+
 % Kollar regel copy(x)
 check_rule(_,[_,Atom, copy(X)],CheckedList):-
 	member([X,Atom,_],CheckedList).
@@ -129,8 +137,8 @@ check_rule(_, [_, _, contel(X)], CheckedList):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Kollar boxen och kallar checkProof som sedan rekursivt itererar igenom boxen
-check_rule(Prems, [[_, _, assumption]|T], CheckedList):-
-	addToList([_, _, assumption], CheckedList, NewList),
+check_rule(Prems, [[X, Atom, assumption]|T], CheckedList):-
+	addToList([X, Atom, assumption], CheckedList, NewList),
 	checkProof(Prems,T,NewList).
 	
 % Kollar regeln negint
@@ -151,9 +159,8 @@ check_rule(_, [_, Atom, pbc(X,Y)], CheckedList):-
 	member([X, neg(Atom), assumption], BoxList),
 	member([Y, cont, _], BoxList).
 
-
 % Kollar regel OR-eliminering orel(x,y,u,v,w)
-checked_rule(_, [_, Atom, orel(S1,S2,S3,S4,S5)], CheckedList):-
+check_rule(_, [_, Atom, orel(S1,S2,S3,S4,S5)], CheckedList):-
 	member(BoxList1, CheckedList),
 	member(BoxList2, CheckedList),
 	member([S1, or(Atom1,Atom2),_], CheckedList),
@@ -161,7 +168,6 @@ checked_rule(_, [_, Atom, orel(S1,S2,S3,S4,S5)], CheckedList):-
 	member([S3,Atom, _], BoxList1),
 	member([S4,Atom2, assumption], BoxList2),
 	member([S5,Atom, _], BoxList2).
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %			Listhantering		     %
