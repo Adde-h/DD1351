@@ -133,7 +133,22 @@ check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 % Kollar regel mt(x,y) (ska lägga in resternade tre scenario till)
 check_rule(_,[_, neg(Atom), mt(X,Y)], CheckedList):-
 	member([X,imp(Atom,neg(Atom2)),_], CheckedList),
+	member([Y,neg(neg(Atom2)),_], CheckedList);
+
+	member([X,imp(Atom,Atom2),_], CheckedList),
+	member([Y,neg(Atom2),_], CheckedList),
+
+	write('MT regeln!'),
+	write('\n').
+
+% Kollar regel mt(x,y) fast dubbel negation framför
+check_rule(_,[_,neg(neg(Atom)), mt(X,Y)], CheckedList):-
+	member([X,imp(neg(Atom,Atom2)),_], CheckedList),
+	member([Y,neg(Atom2),_], CheckedList);
+
+	member([X,imp(neg(Atom,neg(Atom2))),_], CheckedList),
 	member([Y,neg(neg(Atom2)),_], CheckedList),
+
 	write('MT regeln!'),
 	write('\n').
 
