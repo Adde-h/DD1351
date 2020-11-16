@@ -77,8 +77,6 @@ check_rule(Prems, [_, Atom, premise], _):-
 
 % Kollar regel andint(X,Y)
 check_rule(_, [_, and(Atom1,Atom2), andint(X,Y)], CheckedList):-
-	write(CheckedList),
-	write('\n'),
 	member([X, Atom1, _], CheckedList),
 	member([Y, Atom2, _], CheckedList),
 	write('Andint regeln!'),
