@@ -28,12 +28,13 @@
 % contel(x) 		Klart
 % negnegint(x) 		Klart
 % negnegel(x) 		Klart
-% mt(x,y) 			Klart (Ej Fullständig)
+% mt(x,y) 			Klart
 % pbc(x,y) 			Klart
 % lem 				Klart
 %
-% valid16.txt failed. The proof is valid but your program rejected it!
 
+%[5, _ _]
+%[[5,_,_]]
 
 
 verify(InputFileName) :- see(InputFileName),
@@ -76,6 +77,8 @@ check_rule(Prems, [_, Atom, premise], _):-
 
 % Kollar regel andint(X,Y)
 check_rule(_, [_, and(Atom1,Atom2), andint(X,Y)], CheckedList):-
+	write(CheckedList),
+	write('\n'),
 	member([X, Atom1, _], CheckedList),
 	member([Y, Atom2, _], CheckedList),
 	write('Andint regeln!'),
