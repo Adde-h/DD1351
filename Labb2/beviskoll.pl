@@ -9,35 +9,9 @@
 %
 % cd C:/Users/tonac/Documents/GitHub/DD1351/Labb2/
 % swipl
-% ['test.pl'].
-% test
-% ['run_all_tests.pl'].
-% run_all_tests('test6.pl').
 
-% premise 			Klart
-% assumption		Klart
-% copy(x) 			Klart
-% andint(x,y) 		Klart
-% andel1(x) 		Klart
-% andel2(x) 		Klart
-% orint1(x) 		Klart
-% orint2(x) 		Klart
-% orel(x,y,u,v,w)	Klart (Behöver Testas)
-% impint(x,y) 		Klart
-% impel(x,y)		Klart
-% negint(x,y) 		Klart
-% negel(x,y) 		Klart
-% contel(x) 		Klart
-% negnegint(x) 		Klart
-% negnegel(x) 		Klart
-% mt(x,y) 			Klart (Ej Fullständig)
-% pbc(x,y) 			Klart
-% lem 				Klart
-%
-% valid03.txt failed. The proof is valid but your program rejected it!
-% valid04.txt failed. The proof is valid but your program rejected it!
-% valid16.txt failed. The proof is valid but your program rejected it!
-% valid19.txt failed. The proof is valid but your program rejected it!
+% ['run_all_tests.pl'].
+% run_all_tests('beviskoll.pl').
 
 
 verify(InputFileName) :- see(InputFileName),
@@ -117,6 +91,17 @@ check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 % Kollar regel mt(x,y) (ska lägga in resternade tre scenario till)
 check_rule(_,[_, neg(Atom), mt(X,Y)], CheckedList):-
 	member([X,imp(Atom,neg(Atom2)),_], CheckedList),
+	member([Y,neg(neg(Atom2)),_], CheckedList);
+
+	member([X,imp(Atom,Atom2),_], CheckedList),
+	member([Y,neg(Atom2),_], CheckedList).
+
+% Kollar regel mt(x,y) fast dubbel negation framför
+check_rule(_,[_,neg(neg(Atom)), mt(X,Y)], CheckedList):-
+	member([X,imp(neg(Atom,Atom2)),_], CheckedList),
+	member([Y,neg(Atom2),_], CheckedList);
+
+	member([X,imp(neg(Atom,neg(Atom2))),_], CheckedList),
 	member([Y,neg(neg(Atom2)),_], CheckedList).
 
 % Kollar regel negnegint(x)
