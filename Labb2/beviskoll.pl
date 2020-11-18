@@ -9,6 +9,7 @@
 %
 % cd C:/Users/tonac/Documents/GitHub/DD1351/Labb2/
 % swipl
+% ['beviskoll.pl'].
 
 % ['run_all_tests.pl'].
 % run_all_tests('beviskoll.pl').
@@ -88,7 +89,7 @@ check_rule(_,[_,cont, negel(X,Y)], CheckedList):-
 	member([X, Atom,_], CheckedList),
 	member([Y, neg(Atom),_], CheckedList).
 
-% Kollar regel mt(x,y) (ska lägga in resternade tre scenario till)
+% Kollar regel mt(x,y) 
 check_rule(_,[_, neg(Atom), mt(X,Y)], CheckedList):-
 	member([X,imp(Atom,neg(Atom2)),_], CheckedList),
 	member([Y,neg(neg(Atom2)),_], CheckedList);
