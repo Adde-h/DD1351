@@ -15,3 +15,20 @@ verify(Input) :-
 check(_, L, S, [], X).
 check(_, L, S, [], neg(X)).
 
+% And
+check(T, L, S, [], and(F,G)).
+
+
+% Or
+
+% AX
+
+% EX
+
+% AG
+
+% EG
+
+% EF
+
+% AF
