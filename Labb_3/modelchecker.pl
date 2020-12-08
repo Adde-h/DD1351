@@ -32,14 +32,14 @@ check(T, L, S, [], and(F,G)).
 
 % Or
 
-% AX
+% AX - Nästa väg gäller fi
 
-% EX
+% EX - I något av nästa vägarna gäller fi
 
-% AG
+% AG - För alla vägar gäller fi alltid
 
-% EG
+% EG - Det finns en väg där alltid fi gäller
 
-% EF
+% EF - Det finns en väg där så småningom fi gäller
 
-% AF
+% AF - I något av vägarna gäller fi så småningom
