@@ -5,7 +5,7 @@
 %
 % cd C:/Users/tonac/Documents/GitHub/DD1351/Labb_3/
 % swipl
-% ['modelchecker.pl'].
+% consult('modelchecker.pl').
 
 
 % check(T, L, S, U, F)
@@ -70,8 +70,9 @@ check(T, L, S, [], ex(X)):-
 checkEX(_,_,[]).
 checkEX(L,X,[Q|Tail]):-
     member([Q,L2],L),
-    member(X,L2);
+    member(X,L2), 
     checkEX(L,X,Tail).
+
     
 % AG - För alla vägar gäller fi alltid - valid151
 
