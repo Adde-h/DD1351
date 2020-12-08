@@ -37,17 +37,11 @@ check(_, L, S, [], neg(X)):-
     \+ member(X,Q),
     write('Neg Literals!\n').
 
-<<<<<<< Updated upstream
 % And - Valid 087
 check(T, L, S, [], and(X1,X2)):-
     check(T, L, S, [], X1),
     check(T, L, S, [], X2),
     write('And!\n').
-=======
-
-% And
-check(T, L, S, [], and(F,G)).
->>>>>>> Stashed changes
 
 % Or - valid 035
 check(T, L, S, [], or(X1,X2)):-
