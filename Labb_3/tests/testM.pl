@@ -23,31 +23,26 @@ verify(Input) :-
 % Literals
 check(_, L, S, [], X):-
     member([S,Q], L),
-    member(X,Q),
-    write('Literals!\n').
+    member(X,Q).
 
 check(_, L, S, [], neg(X)):-
     member([S,Q], L),
-    \+ member(X,Q),
-    write('Neg Literals!\n').
+    \+ member(X,Q).
 
 % And - Valid 087
 check(T, L, S, [], and(X1,X2)):-
     check(T, L, S, [], X1),
-    check(T, L, S, [], X2),
-    write('And!\n').
+    check(T, L, S, [], X2).
 
 % Or - valid 035
 check(T, L, S, [], or(X1,X2)):-
     check(T, L, S, [], X1);
-    check(T, L, S, [], X2),
-    write('Or!\n').
+    check(T, L, S, [], X2).
 
 % AX - Alla nästa väg gäller fi - valid175
 check(T, L, S, [], ax(X)):-
     member([S,Q], T),
-    checkALL(T, L, Q, [], X),
-    write('AX\n').
+    checkALL(T, L, Q, [], X).
 
 /*
 check(T, L, S, [], ax(X)):-
@@ -65,8 +60,7 @@ checkAX(L,X,[Q|Tail]):-
 % EX - I något av nästa vägarna gäller fi - valid 005
 check(T, L, S, [], ex(X)):-
     member([S,Q], T),
-    checkSOME(T, L, Q, [], X),
-    write('EX\n').
+    checkSOME(T, L, Q, [], X).
 
 
 
@@ -88,60 +82,52 @@ checkEX(L,X,[Q|Tail]):-
 
 % AG1 - basfall
 check(_, _, S, U, ag(_)):-
-    member(S, U),
-    write('AG1!\n').
+    member(S, U).
 %AG2
 check(T, L, S, U, ag(X)):-
     \+ member(S, U),
     check(T, L, S, [], X),
     member([S,Q], T),
-    checkALL(T, L, Q, [S|U], ag(X)),
-    write('AG2\n').
+    checkALL(T, L, Q, [S|U], ag(X)).
 
 % EG - Det finns en väg där alltid fi gäller - valid016
 
 % EG1 - basfall
 check(_, _, S, U, eg(_)):-
-    member(S, U),
-    write('EG1!\n').
+    member(S, U).
 
 % EG2
 check(T, L, S, U, eg(X)):-
     \+ member(S, U),
     check(T, L, S, [], X),
     member([S,Q], T),
-    checkSOME(T, L, Q, [S|U], eg(X)),
-    write('EG2!\n').
+    checkSOME(T, L, Q, [S|U], eg(X)).
 
 % EF - Det finns en väg där så småningom fi gäller - valid023
 
 %EF1 - basfall
 check(T, L, S, U, ef(X)):-
     \+ member(S, U),
-    check(T, L, S, [], X),
-    write('EF1!\n').
+    check(T, L, S, [], X).
 
 %EF2
 check(T, L, S, U, ef(X)):-
     \+ member(S, U),
     member([S,Q], T),
-    checkSOME(T, L, Q, [S|U], ef(X)),
-    write('EF2!\n').
+    checkSOME(T, L, Q, [S|U], ef(X)).
 
 % AF - Över alla vägar gäller fi så småningom - valid004
 
 % AF1 - basfall
 check(T, L, S, U, af(X)):-
     \+ member(S, U),
-    check(T, L, S, [], X),
-    write('AF1!\n').
+    check(T, L, S, [], X).
 
 % AF2
 check(T, L, S, U, af(X)):-
     \+ member(S, U),
     member([S,Q], T),
-    checkALL(T, L, Q, [S|U], af(X)),
-    write('AF2!\n').
+    checkALL(T, L, Q, [S|U], af(X)).
 
 %%
 % predikat för att kolla alla vägar 'A'
