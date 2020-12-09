@@ -1,0 +1,34 @@
+Atomer = {pin, fel, god, knapp1, knapp2, belopp}
+Tillstånd = {start, verifiering, försök igen, meny, uttag, insättning, saldo}
+
+st = start
+ver = verifiering
+fi = försök igen
+me = meny
+p = pin
+ut = uttag
+in = insättning
+k1 = knapp1
+k2 = knapp2
+g = godkänt
+be = belopp
+f = fel
+sa = saldo
+
+[[st, [ver]],
+[ver, [st, fi, me]],
+[fi, [p]],
+[me, [ut, in, st]],
+[ut, [me, sa]],
+[in, [me, sa]],
+[sa, [st]]].
+
+[[st, []],
+[ver, [p]],
+[fi, [p,f]],
+[me, [p,g]],
+[ut, [p,g,k1]],
+[in, [p,g,k2]],
+[sa, [p,god,be]]].
+
+
