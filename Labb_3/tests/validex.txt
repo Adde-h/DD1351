@@ -16,4 +16,4 @@
 
 st.
 
-ef(ef(and(p,g))).
+ax(and(p,ex(and(and(p,g),ex(and(or(and(and(p,g),k1),and(and(p,g),k2)),ex(and(and(p,g),be)))))))).
