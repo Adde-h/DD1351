@@ -29,6 +29,9 @@ sa = saldo
 [me, [p,g]],
 [ut, [p,g,k1]],
 [in, [p,g,k2]],
-[sa, [p,god,be]]].
+[sa, [p,g,be]]].
 
 
+ef(ef(ex(or(and(p,g),k1),(and(p,g),k2))))
+ef(and(neg(f)),ef(and(and(p,g)),be)).
+ef(and(and(p,g)).

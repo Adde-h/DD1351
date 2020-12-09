@@ -1,0 +1,19 @@
+[[st, [ver]],
+[ver, [st, fi, me]],
+[fi, [p]],
+[me, [ut, in, st]],
+[ut, [me, sa]],
+[in, [me, sa]],
+[sa, [st]]].
+
+[[st, []],
+[ver, [p]],
+[fi, [p,f]],
+[me, [p,g]],
+[ut, [p,g,k1]],
+[in, [p,g,k2]],
+[sa, [p,g,be]]].
+
+st.
+
+ef(ef(and(p,g))).
