@@ -93,7 +93,21 @@ checkEX(L,X,[Q|Tail]):-
 
     
 % AG - För alla vägar gäller fi alltid - valid151
-check(T, L, S, U, ag(X)).
+
+% AG1 - basfall
+check(_, _, S, U, ag(_)):-
+    member(S, U),
+    write('AG1!\n').
+%AG2
+check(T, L, S, U, ag(X)):-
+    \+ member(S, U),
+    check(T, L, S, [], X),
+    member([S,Q], T),
+    checkALL(T, L, Q, [S|U], ag(X)),
+    write('AG2\n').
+
+
+
     
     
 
@@ -109,11 +123,11 @@ check(T, L, S, U, ag(X)).
 
 % predikat för att kolla alla vägar 'A'
 checkALL(_, _, [], _, _).
-checkALL(T, L, [Q1|Tail], [], X):-
-    check(T, L, Q1, [], X),
-    checkALL(T, L, Tail, [], X).
+checkALL(T, L, [Q1|Tail], U, X):-
+    check(T, L, Q1, U, X),
+    checkALL(T, L, Tail, U, X).
 
 % predikat för att kolla någon väg 'E'
-checkSOME(T, L, [Q1|Tail], [], X):-
-    check(T, L, Q1, [], X);
-    checkSOME(T, L, Tail, [], X).
+checkSOME(T, L, [Q1|Tail], U, X):-
+    check(T, L, Q1, U, X);
+    checkSOME(T, L, Tail, U, X).
