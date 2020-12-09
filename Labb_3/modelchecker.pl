@@ -29,7 +29,6 @@ verify(Input) :-
 check(_, L, S, [], X):-
     member([S,Q], L),
     member(X,Q),
-    check(_, L, S, [], X),
     write('Literals!\n').
 
 check(_, L, S, [], neg(X)):-
@@ -51,6 +50,15 @@ check(T, L, S, [], or(X1,X2)):-
 
 % AX - Alla nästa väg gäller fi - valid175
 check(T, L, S, [], ax(X)):-
+    member([S,Q], T),
+    checkALL(T, L, Q, [], X),
+    write('AX\n').
+
+
+
+
+/*
+check(T, L, S, [], ax(X)):-
     member([S,Q],T),
     checkAX(L,X,Q),
     write('Ax!\n').
@@ -60,8 +68,17 @@ checkAX(L,X,[Q|Tail]):-
     member([Q,L2],L),
     member(X,L2),
     checkAX(L,X,Tail).
+*/
 
 % EX - I något av nästa vägarna gäller fi - valid 005
+check(T, L, S, [], ex(X)):-
+    member([S,Q], T),
+    checkSOME(T, L, Q, [], X),
+    write('EX\n').
+
+
+
+/*
 check(T, L, S, [], ex(X)):-
     member([S,Q],T),
     checkEX(L,X,Q),
@@ -72,12 +89,31 @@ checkEX(L,X,[Q|Tail]):-
     member([Q,L2],L),
     member(X,L2), 
     checkEX(L,X,Tail).
+*/
 
     
 % AG - För alla vägar gäller fi alltid - valid151
+check(T, L, S, U, ag(X)).
+    
+    
+
+
+
 
 % EG - Det finns en väg där alltid fi gäller - valid016
 
 % EF - Det finns en väg där så småningom fi gäller - valid023
 
 % AF - Över alla vägar gäller fi så småningom - valid004
+
+
+% predikat för att kolla alla vägar 'A'
+checkALL(_, _, [], _, _).
+checkALL(T, L, [Q1|Tail], [], X):-
+    check(T, L, Q1, [], X),
+    checkALL(T, L, Tail, [], X).
+
+% predikat för att kolla någon väg 'E'
+checkSOME(T, L, [Q1|Tail], [], X):-
+    check(T, L, Q1, [], X);
+    checkSOME(T, L, Tail, [], X).
