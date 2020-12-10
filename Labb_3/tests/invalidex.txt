@@ -20,7 +20,7 @@
 
 st.
 
-ax(ef(or(and(and(p,g),k1),and(and(p,g),k2)))).
+ax(ef(and(and(p,g),f))).
 
 
 
