@@ -72,6 +72,7 @@ check(T, L, S, [], ex(X)):-
 % AG1 - basfall
 check(_, _, S, U, ag(_)):-
     member(S, U).
+
 %AG2
 check(T, L, S, U, ag(X)):-
     \+ member(S, U),
