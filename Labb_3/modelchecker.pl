@@ -19,7 +19,7 @@
 
 verify(Input) :-
     see(Input), read(T), read(L), read(S), read(F), seen,
-    check(T, L, S, [], F).
+    check(T, L, S, [], F), !.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %			Literals		    %
