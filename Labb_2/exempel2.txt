@@ -1,0 +1,17 @@
+[imp(imp(a,b),c), and(a,b)].
+
+c.
+
+[
+	[1, imp(imp(a,b),c), 	premise],
+	[2, and(a,b),			premise],
+	[
+		[3, a,				assumption],
+		[4, b,				andel2(2)]
+	],
+	[5, imp(a,b), 			impint(3,4)],
+	[6, c, 					impel(5,1)]
+].
+	
+	
+		
